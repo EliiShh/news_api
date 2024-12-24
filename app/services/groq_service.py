@@ -28,11 +28,11 @@ def get_all_news_obj(batch):
         try:
             srt_res = process_content(selected_data, groq_client)
             dict_res = convert_groq_to_dict(srt_res)
+            loc = get_lat_lon(dict_res["city_name"], dict_res["country_txt"])
+            event_data = {**selected_data, **loc}
+            events.append(event_data)
         except (Exception, TypeError):
             continue
-        loc = get_lat_lon(dict_res["city_name"], dict_res["country_txt"])
-        event_data = {**selected_data, **dict_res, **loc}
-        events.append(event_data)
 
     return events
 
