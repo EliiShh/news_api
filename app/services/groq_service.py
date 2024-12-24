@@ -1,5 +1,4 @@
 from app.groq_api.message import process_content
-from app.repository.api_repo import fetch_articles
 from app.settings.groq_config import groq_client
 from app.utils.groq_utils import convert_groq_to_dict
 from geopy import Photon
@@ -31,7 +30,8 @@ def get_all_news_obj(batch):
             dict_res = convert_groq_to_dict(srt_res)
         except (Exception, TypeError):
             continue
-        event_data = {**selected_data, **dict_res}
+        loc = get_lat_lon(dict_res["city_name"], dict_res["country_txt"])
+        event_data = {**selected_data, **dict_res, **loc}
         events.append(event_data)
 
     return events

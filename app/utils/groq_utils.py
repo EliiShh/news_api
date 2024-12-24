@@ -12,6 +12,6 @@ def convert_groq_to_dict(str_to_dict):
             return {'region_txt': n.get('region_txt'), 'country_txt': n.get('country_txt'), 'city_name': n.get('city_name')}
         except (ValueError, SyntaxError, KeyError, Exception):
             return {'region_txt':None, 'country_txt':None, "city_name": None}
-
+    return {'region_txt': None, 'country_txt': None, "city_name": None}
 
 
